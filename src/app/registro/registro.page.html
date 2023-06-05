@@ -1,0 +1,122 @@
+<ion-router-outlet>
+  <ion-header>
+    <ion-toolbar class="color_toolbar">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-menu-button auto-hide="false">
+        </ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-menu side="end" contentId="main-content">
+    <ion-header>
+      <ion-toolbar class="color_toolbar">
+        <ion-title side="start">Menú</ion-title>
+        <ion-buttons slot="end">
+          <ion-button expand="block" (click)="cerrarMenu()">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+    </ion-content>
+    <ion-footer>
+      <ion-toolbar class="color_footer">
+        <ion-buttons slot="end">
+          <ion-button expand="block" href="https://github.com/JuanPa3232" target="_blank">
+            <ion-icon name="help-circle"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-footer>
+  </ion-menu>
+
+  <ion-content id="main-content">
+    <ion-card>
+      <ion-card-header>
+        <ion-avatar class="circulo">
+          <ion-fab-button  (click)="takePhoto()" class="boton-circulo">
+            <ion-icon name="add-outline"></ion-icon>
+            <ion-img [src]="photo" *ngFor="let photo of photos"></ion-img>
+          </ion-fab-button>
+      </ion-avatar>
+        <ion-card-title class="logo_optica">REGISTRATE</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+
+        <form [formGroup]="formularioRegistro">
+
+          <ion-item fill="outline" class="register">
+            <ion-input formControlName="username" type="text" clear-input="true" required="true" [clearOnEdit]="true"
+              placeholder="Ingresa tu usuario"></ion-input>
+          </ion-item>
+          <hr>
+          <ion-item fill="outline" class="register">
+            <ion-input formControlName="name" type="text" clear-input="true" required="true" [clearOnEdit]="true"
+              placeholder="Ingresa tu nombre"></ion-input>
+          </ion-item>
+          <hr>
+          <ion-item fill="outline" class="register">
+            <ion-input formControlName="lastname" type="text" clear-input="true" required="true" [clearOnEdit]="true"
+              placeholder="Ingresa tus apellidos"></ion-input>
+          </ion-item>
+          <hr>
+          <ion-item fill="outline" class="register">
+            <ion-input formControlName="email" type="email" clear-input="true" required="true" [clearOnEdit]="true"
+              errorText="invalid email or in use" placeholder="Ingresa tu correo"></ion-input>
+          </ion-item>
+          <hr>
+          <ion-item fill="outline" class="register">
+            <ion-input type="{{showPassword ? 'text' : 'password'}}" formControlName="password" clear-input="true"
+              required="true" [clearOnEdit]="true" placeholder="Ingresa tu contraseña"></ion-input>
+            <ion-icon slot="end" [name]="showPassword ? 'eye-off' : 'eye'" (click)="showPassword = !showPassword"
+              class="color-icono"></ion-icon>
+          </ion-item>
+          <hr>
+          <ion-item fill="outline" class="register">
+            <ion-input formControlName="phone" type="tel" clear-input="true" required="true" [clearOnEdit]="true"
+              inputmode="numeric" pattern="[0-9]*" placeholder="Ingresa un numero de telefono" maxlength="10"
+              oninput="this.value = this.value.slice(0, 10)"></ion-input>
+          </ion-item>
+          <hr>
+          <ion-item fill="outline" class="register">
+            <ion-input formControlName="age" type="number" clear-input="true" required="true" [clearOnEdit]="true"
+              inputmode="numeric" pattern="[0-9]*" placeholder="Ingresa tu edad" maxlength="2"
+              oninput="this.value = this.value.slice(0, 2)"></ion-input>
+          </ion-item>
+          <hr>
+          <ion-item fill="outline" class="register">
+            <ion-input formControlName="birth" type="date" requiered="true"
+              placeholder="Ingresa tu fecha de nacimiento"></ion-input>
+          </ion-item>
+          <br>
+          <ion-button [disabled]="!formularioRegistro.valid" type="submit" (click)="doSave()">
+            Regristrar cuenta
+          </ion-button>
+          <br>
+          <br>
+          <ion-text color="light">¿Ya tienes una cuenta?</ion-text>
+          <br>
+          <ion-button routerLink="/login">
+            Inicia sesion
+          </ion-button>
+        </form>
+        <br>
+
+
+      </ion-card-content>
+    </ion-card>
+    <ion-footer>
+      <ion-toolbar class="color_footer">
+        <ion-text>
+          <p class="footer">© 2023 - Opticas SG. Mejorar tu vision es nuestra vision</p>
+        </ion-text>
+      </ion-toolbar>
+    </ion-footer>
+  </ion-content>
+</ion-router-outlet>
